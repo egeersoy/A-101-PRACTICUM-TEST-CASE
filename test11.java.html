@@ -1,0 +1,215 @@
+<html>
+<head>
+<title>test11.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+test11.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">tests</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">org.junit.Assert</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.By</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.StaleElementReferenceException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.WebDriver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.WebElement</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.chrome.ChromeDriver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.interactions.Actions</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.support.ui.WebDriverWait</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.support.ui.Select</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.time.Duration</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.UUID</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.concurrent.atomic.AtomicReference</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">test11 {</span>
+    <span class="s0">private </span><span class="s1">WebDriver driver</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">String baseUrl</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">WebElement element</span><span class="s0">;</span>
+
+    <span class="s0">public static void </span><span class="s1">main(String[] args) </span><span class="s0">throws </span><span class="s1">InterruptedException {</span>
+
+        <span class="s1">System.setProperty(</span><span class="s2">&quot;webdriver.chrome.driver&quot;</span><span class="s0">, </span><span class="s2">&quot;drivers/chromedriver.exe&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">WebDriver driver = </span><span class="s0">new </span><span class="s1">ChromeDriver()</span><span class="s0">;</span>
+
+        <span class="s1">Actions action = </span><span class="s0">new </span><span class="s1">Actions(driver)</span><span class="s0">;</span>
+
+        <span class="s1">driver.get(</span><span class="s2">&quot;https://www.a101.com.tr/&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.manage().window().maximize()</span><span class="s0">;</span>
+        <span class="s1">driver.navigate().refresh()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;A101 sitesine başarıyla giriş yapıldı.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+
+        <span class="s1">WebElement mainpage0 = driver.findElement(By.id(</span><span class="s2">&quot;CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">mainpage0.click()</span><span class="s0">;</span>
+
+        <span class="s1">WebElement mainpage1 = driver.findElement(By.cssSelector(</span><span class="s2">&quot;[title*='GİYİM &amp; AKSESUAR']&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">action.moveToElement(mainpage1).build().perform()</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">mainpage1.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Giyim ve Aksesuar sekmesi başarıyla açıldı.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement mainpage2 = driver.findElement(By.cssSelector(</span><span class="s2">&quot;div.categories &gt; ul &gt; li:nth-child(6) &gt; a&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">mainpage2.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Kadın İç Giyim sekmesi başarıyla açıldı.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">AtomicReference&lt;WebElement&gt; mainpage3 = </span><span class="s0">new </span><span class="s1">AtomicReference&lt;&gt;()</span><span class="s0">;</span>
+
+        <span class="s0">new </span><span class="s1">WebDriverWait(driver</span><span class="s0">, </span><span class="s1">Duration.ofSeconds(</span><span class="s3">4</span><span class="s1">))</span>
+                <span class="s1">.ignoring(StaleElementReferenceException.</span><span class="s0">class</span><span class="s1">)</span>
+                <span class="s1">.until((WebDriver d) -&gt; {</span>
+                    <span class="s1">mainpage3.set(d.findElement(By.cssSelector(</span><span class="s2">&quot;a[data-name=</span><span class="s0">\&quot;</span><span class="s2">category_ids</span><span class="s0">\&quot;</span><span class="s2">][data-value=</span><span class="s0">\&quot;</span><span class="s2">1567</span><span class="s0">\&quot;</span><span class="s2">]&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+                    <span class="s0">return true;</span>
+                <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">mainpage3.get().click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Dizaltı Çorap sekmesi başarıyla açıldı.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Thread.sleep(</span><span class="s3">4000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">AtomicReference&lt;WebElement&gt; baslik = </span><span class="s0">new </span><span class="s1">AtomicReference&lt;&gt;()</span><span class="s0">;</span>
+
+        <span class="s0">new </span><span class="s1">WebDriverWait(driver</span><span class="s0">, </span><span class="s1">Duration.ofSeconds(</span><span class="s3">15</span><span class="s1">))</span>
+                <span class="s1">.ignoring(StaleElementReferenceException.</span><span class="s0">class</span><span class="s1">)</span>
+                <span class="s1">.until((WebDriver d) -&gt; {</span>
+                    <span class="s1">baslik.set(d.findElement(By.cssSelector(</span><span class="s2">&quot;div.products-list &gt; div &gt; ul &gt; li:nth-child(1) &gt; article &gt; a &gt; div &gt; header &gt; hgroup &gt; h3&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+                    <span class="s0">return true;</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">Assert.assertTrue(baslik.get().getText().contains(</span><span class="s2">&quot;Siyah&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+        <span class="s1">AtomicReference&lt;WebElement&gt; siyahcorap = </span><span class="s0">new </span><span class="s1">AtomicReference&lt;&gt;()</span><span class="s0">;</span>
+
+        <span class="s0">new </span><span class="s1">WebDriverWait(driver</span><span class="s0">, </span><span class="s1">Duration.ofSeconds(</span><span class="s3">15</span><span class="s1">))</span>
+                <span class="s1">.ignoring(StaleElementReferenceException.</span><span class="s0">class</span><span class="s1">)</span>
+                <span class="s1">.until((WebDriver d) -&gt; {</span>
+                    <span class="s1">siyahcorap.set(d.findElement(By.cssSelector(</span><span class="s2">&quot;body &gt; section &gt; section.page-list.js-container &gt; div:nth-child(3) &gt; div.content &gt; div &gt; div.col-md-10.col-sm-9 &gt; div.products-list &gt; div &gt; ul &gt; li:nth-child(1) &gt; article &gt; div &gt; div.add-basket.js-add-basket-area &gt; div.count &gt; a&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+                    <span class="s0">return true;</span>
+                <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Siyah Çorap Doğrulaması başarıyla yapıldı.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">siyahcorap.get().click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Siyah Çoraba başarıyla tıklandı.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+
+        <span class="s1">WebElement sepeteekle = driver.findElement(By.cssSelector(</span><span class="s2">&quot;body &gt; section &gt; section.page-product.js-product-container.js-product-init &gt; div.container &gt; div.content &gt; div &gt; div.row &gt; div.col-sm-3 &gt; div.product-buy-info.js-product-buy-info &gt; button&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">sepeteekle.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Ürün sepete başarıyla eklendi.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement alisverisedevam = driver.findElement(By.cssSelector(</span><span class="s2">&quot;#js-modal-basket &gt; div.right-side &gt; a.button.green.block&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">alisverisedevam.click()</span><span class="s0">;</span>
+
+        <span class="s1">WebElement sepetim = </span><span class="s0">new </span><span class="s1">WebDriverWait(driver</span><span class="s0">, </span><span class="s1">Duration.ofSeconds(</span><span class="s3">4</span><span class="s1">))</span>
+                <span class="s1">.until(dr -&gt; dr.findElement(By.xpath(</span><span class="s2">&quot;/html/body/section/header/div/div[2]/div[2]/a[4]&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">sepetim.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Sepetim sekmesine başarıyla gidildi.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement sepetonay = driver.findElement(By.cssSelector(</span><span class="s2">&quot;body &gt; section &gt; div.page-basket &gt; div.container.js-basket-container &gt; div &gt; div.col-sm-3 &gt; div &gt; a&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">2000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">sepetonay.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Sepet başarıyla onaylandı.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement nouye = driver.findElement(By.cssSelector(</span><span class="s2">&quot;body &gt; section &gt; div.page-auth &gt; div &gt; div.row.js-block-user.login-row &gt; div:nth-child(1) &gt; div.auth__form__proceed__wrapper &gt; a&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">2000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">nouye.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Üyeliksiz işleme başarıyla devam edildi.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement uyelik = driver.findElement(By.cssSelector(</span><span class="s2">&quot;body &gt; section &gt; div.page-auth &gt; div &gt; div.row.js-block-email &gt; div &gt; div &gt; form &gt; div.field &gt; input&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">uyelik.click()</span><span class="s0">;</span>
+        <span class="s1">uyelik.sendKeys(String.join(</span><span class="s2">&quot;&quot;</span><span class="s0">,</span><span class="s1">UUID.randomUUID().toString().split(</span><span class="s2">&quot;-&quot;</span><span class="s1">)) + </span><span class="s2">&quot;@hotmail.com&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement devamet = driver.findElement(By.cssSelector(</span><span class="s2">&quot;body &gt; section &gt; div.page-auth &gt; div &gt; div.row.js-block-email &gt; div &gt; div &gt; form &gt; button&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">3000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">devamet.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;E-mail başarıyla girildi.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement adres = </span><span class="s0">new </span><span class="s1">WebDriverWait(driver</span><span class="s0">, </span><span class="s1">Duration.ofSeconds(</span><span class="s3">6</span><span class="s1">))</span>
+                <span class="s1">.until(dr -&gt; dr.findElement(By.xpath(</span><span class="s2">&quot;/html/body/section/section/div/div[2]/div/div[1]/div/div[1]/div[2]/ul[2]/li/a&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">adres.click()</span><span class="s0">;</span>
+
+        <span class="s1">WebElement adresbasligi = driver.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(3) &gt; div &gt; div &gt; label &gt; input[type=text]&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">adresbasligi.click()</span><span class="s0">;</span>
+        <span class="s1">adresbasligi.sendKeys(</span><span class="s2">&quot;Ev Adresi&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement ad = driver.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(4) &gt; div:nth-child(1) &gt; div &gt; label &gt; input[type=text]&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">ad.click()</span><span class="s0">;</span>
+        <span class="s1">ad.sendKeys(</span><span class="s2">&quot;Ege&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement soyad = driver.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(4) &gt; div:nth-child(2) &gt; div &gt; label &gt; input[type=text]&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">soyad.click()</span><span class="s0">;</span>
+        <span class="s1">soyad.sendKeys(</span><span class="s2">&quot;Ersoy&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement telefon = driver.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(5) &gt; div &gt; div &gt; label &gt; input&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">telefon.click()</span><span class="s0">;</span>
+        <span class="s1">telefon.sendKeys(</span><span class="s2">&quot;5301362241&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement il = driver.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(7) &gt; div:nth-child(1) &gt; div &gt; label &gt; div &gt; select&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">il.click()</span><span class="s0">;</span>
+        <span class="s1">Select il1 = </span><span class="s0">new </span><span class="s1">Select(driver.findElement(By.name(</span><span class="s2">&quot;city&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">il1.selectByVisibleText(</span><span class="s2">&quot;KOCAELİ&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement ilce = </span><span class="s0">new </span><span class="s1">WebDriverWait(driver</span><span class="s0">, </span><span class="s1">Duration.ofSeconds(</span><span class="s3">6</span><span class="s1">))</span>
+                <span class="s1">.until(dr -&gt; dr.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(7) &gt; div:nth-child(2) &gt; div &gt; label &gt; div &gt; select&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">ilce.click()</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Select ilce1 = </span><span class="s0">new </span><span class="s1">Select(driver.findElement(By.name(</span><span class="s2">&quot;township&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">ilce1.selectByVisibleText(</span><span class="s2">&quot;İZMİT&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement mahalle = </span><span class="s0">new </span><span class="s1">WebDriverWait(driver</span><span class="s0">, </span><span class="s1">Duration.ofSeconds(</span><span class="s3">6</span><span class="s1">))</span>
+                <span class="s1">.until(dr -&gt; dr.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(8) &gt; label &gt; div &gt; select&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">mahalle.click()</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">Select mahalle1 = </span><span class="s0">new </span><span class="s1">Select(driver.findElement(By.name(</span><span class="s2">&quot;district&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">mahalle1.selectByVisibleText(</span><span class="s2">&quot;AKARCA MAH&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement tamadres = driver.findElement(By.cssSelector(</span><span class="s2">&quot;#js-orders-modal-container &gt; div &gt; div.modal-content &gt; form &gt; div:nth-child(9) &gt; label &gt; textarea&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">tamadres.click()</span><span class="s0">;</span>
+        <span class="s1">tamadres.sendKeys(</span><span class="s2">&quot;Hekimoğlu Sokak , C-1-4 Blok Daire:15 , Kocaeli/İzmit&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">WebElement kaydet = driver.findElement(By.xpath(</span><span class="s2">&quot;//*[@id=</span><span class="s0">\&quot;</span><span class="s2">js-orders-modal-container</span><span class="s0">\&quot;</span><span class="s2">]/div/div[2]/form/button[1]&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">Thread.sleep(</span><span class="s3">2000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">kaydet.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Kullanıcı bilgileri başarıyla girildi.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Thread.sleep(</span><span class="s3">2000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">WebElement ilerle = driver.findElement(By.cssSelector(</span><span class="s2">&quot;body &gt; section &gt; section &gt; div &gt; div.checkout-addresses.js-tab-content.active &gt; div &gt; div.col-sm-9 &gt; div &gt; div.continue &gt; form &gt; div.cargo &gt; button&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">ilerle.click()</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Ödeme sayfasına başarıyla girildi.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">Assert.assertTrue(driver.getCurrentUrl().equals(</span><span class="s2">&quot;https://www.a101.com.tr/orders/checkout/&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Ödeme sayfası başarıyla açılıyor.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
